@@ -338,12 +338,14 @@ var Zepto = (function() {
   }
 
   $.camelCase = camelize
-  $.trim = function(str) {
-    return str == null ? "" : String.prototype.trim.call(str)
-  }
+  // $.trim = function(str) {
+  //   return str == null ? "" : String.prototype.trim.call(str)
+  // }
 
   // plugin compatibility
   $.uuid = 0
+
+  // actually, it is no use
   $.support = { }
   $.expr = { }
   $.noop = function() {}
@@ -376,9 +378,9 @@ var Zepto = (function() {
     return elements
   }
 
-  $.grep = function(elements, callback){
-    return filter.call(elements, callback)
-  }
+  // $.grep = function(elements, callback){
+  //   return filter.call(elements, callback)
+  // }
 
   if (window.JSON) $.parseJSON = JSON.parse
 
@@ -429,10 +431,12 @@ var Zepto = (function() {
     get: function(idx){
       return idx === undefined ? slice.call(this) : this[idx >= 0 ? idx : idx + this.length]
     },
-    toArray: function(){ return this.get() },
-    size: function(){
-      return this.length
-    },
+    // toArray: function(){ return this.get() },
+
+    // deprecated > jquery 1.8
+    // size: function(){
+    //   return this.length
+    // },
     remove: function(){
       return this.each(function(){
         if (this.parentNode != null)
@@ -817,7 +821,7 @@ var Zepto = (function() {
   }
 
   // for now
-  $.fn.detach = $.fn.remove
+  // $.fn.detach = $.fn.remove
 
   // Generate the `width` and `height` functions
   ;['width', 'height'].forEach(function(dimension){

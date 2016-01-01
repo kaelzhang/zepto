@@ -87,32 +87,32 @@
     })
   }
 
-  $.event = { add: add, remove: remove }
+  // $.event = { add: add, remove: remove }
 
-  $.proxy = function(fn, context) {
-    var args = (2 in arguments) && slice.call(arguments, 2)
-    if (isFunction(fn)) {
-      var proxyFn = function(){ return fn.apply(context, args ? args.concat(slice.call(arguments)) : arguments) }
-      proxyFn._zid = zid(fn)
-      return proxyFn
-    } else if (isString(context)) {
-      if (args) {
-        args.unshift(fn[context], fn)
-        return $.proxy.apply(null, args)
-      } else {
-        return $.proxy(fn[context], fn)
-      }
-    } else {
-      throw new TypeError("expected function")
-    }
-  }
+  // $.proxy = function(fn, context) {
+  //   var args = (2 in arguments) && slice.call(arguments, 2)
+  //   if (isFunction(fn)) {
+  //     var proxyFn = function(){ return fn.apply(context, args ? args.concat(slice.call(arguments)) : arguments) }
+  //     proxyFn._zid = zid(fn)
+  //     return proxyFn
+  //   } else if (isString(context)) {
+  //     if (args) {
+  //       args.unshift(fn[context], fn)
+  //       return $.proxy.apply(null, args)
+  //     } else {
+  //       return $.proxy(fn[context], fn)
+  //     }
+  //   } else {
+  //     throw new TypeError("expected function")
+  //   }
+  // }
 
-  $.fn.bind = function(event, data, callback){
-    return this.on(event, data, callback)
-  }
-  $.fn.unbind = function(event, callback){
-    return this.off(event, callback)
-  }
+  // $.fn.bind = function(event, data, callback){
+  //   return this.on(event, data, callback)
+  // }
+  // $.fn.unbind = function(event, callback){
+  //   return this.off(event, callback)
+  // }
   $.fn.one = function(event, selector, data, callback){
     return this.on(event, selector, data, callback, 1)
   }
@@ -155,21 +155,21 @@
     return compatible(proxy, event)
   }
 
-  $.fn.delegate = function(selector, event, callback){
-    return this.on(event, selector, callback)
-  }
-  $.fn.undelegate = function(selector, event, callback){
-    return this.off(event, selector, callback)
-  }
+  // $.fn.delegate = function(selector, event, callback){
+  //   return this.on(event, selector, callback)
+  // }
+  // $.fn.undelegate = function(selector, event, callback){
+  //   return this.off(event, selector, callback)
+  // }
 
-  $.fn.live = function(event, callback){
-    $(document.body).delegate(this.selector, event, callback)
-    return this
-  }
-  $.fn.die = function(event, callback){
-    $(document.body).undelegate(this.selector, event, callback)
-    return this
-  }
+  // $.fn.live = function(event, callback){
+  //   $(document.body).delegate(this.selector, event, callback)
+  //   return this
+  // }
+  // $.fn.die = function(event, callback){
+  //   $(document.body).undelegate(this.selector, event, callback)
+  //   return this
+  // }
 
   $.fn.on = function(event, selector, data, callback, one){
     var autoRemove, delegator, $this = this
@@ -237,30 +237,31 @@
 
   // triggers event handlers on current element just as if an event occurred,
   // doesn't trigger an actual event, doesn't bubble
-  $.fn.triggerHandler = function(event, args){
-    var e, result
-    this.each(function(i, element){
-      e = createProxy(isString(event) ? $.Event(event) : event)
-      e._args = args
-      e.target = element
-      $.each(findHandlers(element, event.type || event), function(i, handler){
-        result = handler.proxy(e)
-        if (e.isImmediatePropagationStopped()) return false
-      })
-    })
-    return result
-  }
+  // $.fn.triggerHandler = function(event, args){
+  //   var e, result
+  //   this.each(function(i, element){
+  //     e = createProxy(isString(event) ? $.Event(event) : event)
+  //     e._args = args
+  //     e.target = element
+  //     $.each(findHandlers(element, event.type || event), function(i, handler){
+  //       result = handler.proxy(e)
+  //       if (e.isImmediatePropagationStopped()) return false
+  //     })
+  //   })
+  //   return result
+  // }
 
+  // no event alias
   // shortcut methods for `.bind(event, fn)` for each event type
-  ;('focusin focusout focus blur load resize scroll unload click dblclick '+
-  'mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave '+
-  'change select keydown keypress keyup error').split(' ').forEach(function(event) {
-    $.fn[event] = function(callback) {
-      return (0 in arguments) ?
-        this.bind(event, callback) :
-        this.trigger(event)
-    }
-  })
+  // ;('focusin focusout focus blur load resize scroll unload click dblclick '+
+  // 'mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave '+
+  // 'change select keydown keypress keyup error').split(' ').forEach(function(event) {
+  //   $.fn[event] = function(callback) {
+  //     return (0 in arguments) ?
+  //       this.bind(event, callback) :
+  //       this.trigger(event)
+  //   }
+  // })
 
   $.Event = function(type, props) {
     if (!isString(type)) props = type, type = props.type
