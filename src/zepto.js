@@ -407,9 +407,9 @@ var Zepto = (function() {
       var i, value, args = []
       for (i = 0; i < arguments.length; i++) {
         value = arguments[i]
-        args[i] = zepto.isZ(value) ? value.toArray() : value
+        args[i] = zepto.isZ(value) ? value.get() : value
       }
-      return concat.apply(zepto.isZ(this) ? this.toArray() : this, args)
+      return concat.apply(zepto.isZ(this) ? this.get() : this, args)
     },
 
     // `map` and `slice` in the jQuery API work differently
