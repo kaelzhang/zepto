@@ -682,7 +682,7 @@ var Zepto = (function() {
         $this.css(props)
       })
       if (!this.length) return null
-      if (!$.contains(document.documentElement, this[0]))
+      if (!$.contains(document.documentElement, this[0]) && document.documentElement !== this[0])
         return {top: 0, left: 0}
       var obj = this[0].getBoundingClientRect()
       return {
